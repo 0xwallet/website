@@ -1,0 +1,3 @@
+define(["handlebars"], function(Handlebars) { return Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<meta name=\"description\" content=\"Code-only, no-clicking, flat-file, node.js cms for professionals. With everything needed - Sass, iconfont generator, spritesheet generator, templates...\">\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+},"useData":true}); });

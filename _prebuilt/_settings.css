@@ -1,0 +1,35 @@
+.full-background {
+	background-image:url('https://s3-eu-west-1.amazonaws.com/enduro.website/direct_uploads/1485265097_Wallpaper-Sunset-Winter.jpg')
+}
+
+	.login-card #polygon {
+		fill: #fff !important;
+	}
+
+	.login-card #e {
+		fill: #000 !important;
+	}
+
+	.login-card #lettering path {
+		fill: #fff !important;
+		stroke: #fff;
+		stroke-width: 4px;
+	}
+
+	.login-card #lettering {
+	}
+
+	.login-card .login-logo {
+	}
+
+	.login-card .login-logo:before {
+		content: '';
+		width: 100%;
+		height: 100%;
+		background-color: #000;
+		opacity: .5;
+		position: absolute;
+		z-index: -1;
+		-webkit-filter: blur(30px);
+		filter: blur(30px);
+	}

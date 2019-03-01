@@ -1,0 +1,36 @@
+{
+  "name": "kiskabricks_scroller",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kiskadigitalmedia/kiskabricks_scroller",
+  "authors": [
+    "gottwik <gottwik@gmail.com>"
+  ],
+  "description": "handles scrolling events",
+  "main": "scroller.js",
+  "moduleType": [],
+  "keywords": [
+    "menu",
+    "mainmenu",
+    "navigation"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0"
+  },
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.0",
+    "commit": "02690e481eb8a58b22c944c1e332f04b2b76673c"
+  },
+  "_source": "https://github.com/kiskadigitalmedia/kiskabricks_scroller.git",
+  "_target": "^1.0.0",
+  "_originalSource": "kiskabricks_scroller"
+}
