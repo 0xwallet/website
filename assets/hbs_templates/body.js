@@ -1,7 +1,7 @@
 define(["handlebars"], function(Handlebars) { return Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<!DOCTYPE html>\n<html>\n	<head>\n		  <title>enduro.js - "
+  return "<!DOCTYPE html>\n<html>\n	<head>\n		  <title>0xWallet - "
     + container.escapeExpression((helpers["default"] || (depth0 && depth0["default"]) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.title : depth0)," Secure, Simple & Extensible Bitcoin Wallet",{"name":"default","hash":{},"data":data}))
     + "</title>\n\n		<link rel=\"stylesheet\" href=\"/assets/css/main.css\">\n		<link rel=\"stylesheet\" href=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/zenburn.min.css\">\n		<link href='https://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'>\n		<link href=\"https://fonts.googleapis.com/css?family=Source+Code+Pro\" rel=\"stylesheet\">\n\n"
     + ((stack1 = container.invokePartial(partials.favicon,depth0,{"name":"favicon","data":data,"indent":"\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
