@@ -17,6 +17,6 @@ define(["handlebars"], function(Handlebars) { return Handlebars.template({"1":fu
   if (!helpers.blog) { stack1 = helpers.blockHelperMissing.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   return buffer + "							        </ul>\n\n						      </li>\n\n					    </ul>\n				  </nav>\n			</div>\n		</div>\n\n		<div class=\"row\">\n			<div class=\"col-md-12 logo text-center\">\n				<div class=\"wedge-6x\"></div>\n"
-    + ((stack1 = container.invokePartial(partials.logo_juste,depth0,{"name":"logo_juste","data":data,"indent":"\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "				<p>Quantum Leap © 2019. All Rights Reserved.</p>\n			</div>\n		</div>\n\n	</div>\n</footer>\n";
+    + ((stack1 = container.invokePartial(partials.logo_owaf,depth0,{"name":"logo_owaf","data":data,"indent":"\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+    + "				<p>Open Wallet Alliance © 2019. All Rights Reserved.</p>\n			</div>\n		</div>\n\n	</div>\n</footer>\n";
 },"usePartial":true,"useData":true}); });

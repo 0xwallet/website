@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		  <title>0xWallet - bit:// 协议</title>
+
+		<link rel="stylesheet" href="/assets/css/main.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/zenburn.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'>
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicon/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicon/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicon/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicon/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/assets/img/favicon/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+		<link rel="manifest" href="/assets/img/favicon//manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/assets/img/favicon//ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+		<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">		<meta name="description" content="Code-only, no-clicking, flat-file, node.js cms for professionals. With everything needed - Sass, iconfont generator, spritesheet generator, templates...">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-81822746-2', 'auto');
+			ga('send', 'pageview');
+		</script>
+
+	</head>
+	<body>
+		<header>
+			<div class="logo" >
+				<a href="/"><svg width="22.1px" height="24.8px" viewBox="0 0 22.1 24.8">
+	  <path id="justhexagon" fill="#231f20" d="M9.8,24.4l-8.6-4.9C0.5,19.1,0,18.2,0,17.3l0-9.9c0-0.9,0.5-1.7,1.3-2.2l8.6-4.9c0.8-0.4,1.7-0.4,2.5,0
+		          l8.6,4.9c0.8,0.4,1.3,1.3,1.3,2.2v9.9c0,0.9-0.5,1.7-1.3,2.2l-8.6,4.9C11.5,24.9,10.6,24.9,9.8,24.4z"/>
+    <circle id="circle_9" fill="#423d3d" cx="11.06" cy="12.4" r="9"/>
+    <circle id="circle_6" fill="#231f20" cx="11.06" cy="12.4" r="6"/>
+    <polyline points="9.33 13.4 11.06 12.4 12.79 13.4" stroke="white" stroke-width="3"
+              stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+    <polyline points="11.06 12.4 11.06 10.4" stroke="white" stroke-width="3"
+              stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+    <circle id="circle_2" fill="#423d3d" cx="11.06" cy="12.4" r="2"/>
+</svg>
+</a>
+			</div>
+			<nav class="screen-menu">
+				<label for="endrjs_collapsed_menu" class="collapsed-menu">
+					<i class="fa fa-bars"></i>
+				</label>
+				<input id="endrjs_collapsed_menu" type="checkbox">
+				<ul>
+						<li>
+							<a  href="/cn">主页</a>
+						</li>
+						<li>
+							<a  href="/docs">文档</a>
+						</li>
+						<li>
+							<a  href="/blog">博客</a>
+						</li>
+						<li>
+							<a target="_blank" href="https://owaf.io/login">登录</a>
+						</li>
+				</ul>
+			</nav>			<div class="clearfix"></div>
+		</header>
+
+	<div class="wedge-5x"></div>
+	<div class="page-container">
+		<div class="panel">
+
+			<a class="back" href="/blog"><i class="fa fa-angle-left"></i>Back to blog</a>
+
+			<div class="row">
+				<div class="col-md-12">
+					<h1>bit:// 协议</h1>
+					<h5>Tuesday, 09 April, 2019</h5>
+					<div class="wedge-3x"></div>
+					<div class="markdown-block"><p>昨天（2019.4.9）bsv应用开发界的牛人_unwriter 发布了 一个新的协议，名为bit:// 。据介绍该协议被称为协议的协议，可以解决比特币应用开发和使用中的诸多问题。</p>
+<p>通用URI模板</p>
+<p>bsv目前已经有了 b://, c:// 这样的协议，今后还会有更多各种各样的协议，所以迫切地需要一个通用的协议，俗称协议的协议。</p>
+<p>目前对于bsv 应用的协议的定义一般是：根据txid找到链上数据，这是原料，然后根据这个协议的内容对原料进行处理，最后得到用户可使用的产品。例如 b:// 协议，放进去的是txid，得出来的可能是bitstagram上的图片等文件。</p>
+<p>image.png</p>
+<p>在前段时间，_unwriter 已经发布了用于注册协议 ID 的 bitcom 项目。受到比特币地址的防碰撞机制的启发（世界上没有两个人能够在安全隔离的环境下，生成出相同的比特币地址），_unwriter 采用比特币地址作为协议的 ID。</p>
+<p>所以，bit:// 的第一部分就是bsv应用协议的ID, 即一个比特币地址。</p>
+<p>bit://[B: Bitcom Address]/[Transaction ID]</p>
+<p>后面的部分的格式，是由该协议的管理者来决定的。管理者可以将协议的定义文档发送到链上。比如一个协议想要支持 user， tx 这两个参数输入，就可以使用协议 ID 的地址发送以下内容到链上：</p>
+<p>OP_RETURN $ route enable /user/:user
+OP_RETURN $ route enable /tx/:tx</p>
+<p>分布式路由</p>
+<p>image.png</p>
+<p>熟悉bsv的朋友们可能听说过瓶子浏览器，通过连接到支持 b:// 协议服务的 API，就可以浏览各种的链上文件、图片等资源。这些API服务商，例如 bico.media 等等，通常会有一个自己运行的 BitDB 服务器。</p>
+<p>这种模式的问题在于，用户需要在自己的瓶子浏览器里配置 API 的地址，虽然瓶子浏览器可以内置地址，但这样不便于更新，也有中心化的问题。既然我们已经有了bsv链这个能够保证数据的最终一致性的共识层，那么为什么不把这些 API 配置保存到链上呢？所以，在 bit:// 协议中，用户可以从链上获取到 API 服务商的 route mapping。</p>
+<p>image.png</p>
+<p>这样，在用户初次安装瓶子浏览器的时候，只需要使用内置的 API 服务，这一点和比特币节点的启动机制如出一辙。然后，再去请求链上的最新的 route mapping，并保存到本地。之后，瓶子浏览器就可以根据各个 API 的速度来进行选择。</p>
+<p>最重要的是，比特币是共识层而非存储层，矿工没有激励去存储完整的区块信息。这时候，对于一些开放的协议，例如 b://, c:// 这种的公开文件协议，要保证数据的持久可用，就需要始终能够连接到正常运行的API服务。借助于bit://  协议的分布式路由机制，我们可以获得到世界上所有支持某个特定协议的 API 服务商，进而得到我们想要的数据。</p>
+<p>任何人都可以发送针对于某个协议的 API 服务的 route 到链上，例如：</p>
+<p>OP_RETURN $ route add 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut /:tx <a href="https://bico.media/${tx}">https://bico.media/${tx}</a>
+OP_RETURN $ route add 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut /:tx <a href="https://api.bitpaste.app/${tx}/raw">https://api.bitpaste.app/${tx}/raw</a>
+OP_RETURN $ route add 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut /:tx <a href="https://media.bitcoinfiles.org/${tx}">https://media.bitcoinfiles.org/${tx}</a></p>
+<p>那么，如何保证这个API是真实可用的？如果有人发送了一个虚假的route到链上，例如调换了两个参数的输入位置，访问的结果可能依旧是可用的，但是数据是错误的。所以，我们在使用时需要能够保证 route 记录是由 API 服务商亲自发出的。</p>
+<p>_unwriter 前几天发布的 bitsticker 协议能够完美解决这个问题。在API调用返回的HTTP Header 中，嵌入发布 route 记录所使用的比特币地址即可。</p>
+<p>HTTP/1.1 200 OK
+server: nginx/1.15.5 (Ubuntu)
+date: Sun, 31 Mar 2019 19:21:05 GMT&#39;
+content-type: image/jpeg
+content-length: 90887
+connection: close
+x-powered-by: Express
+access-control-allow-origin: *
+bitcoin-address: 1ApeFekX4JJLxiK991KHkTSJe9zFTunNHx</p>
+<p>end</p>
+<p>更多的自动化，更多的安全，更美好的未来。</p>
+</div>
+				</div>
+			</div>
+
+			<a class="back" href="/blog"><i class="fa fa-angle-left"></i>Back to blog</a>
+
+		</div>
+		<div id="disqus_thread"></div>
+
+		<script>
+			(function() { // DON'T EDIT BELOW THIS LINE
+			var d = document, s = d.createElement('script');
+			s.src = '//endurojs.disqus.com/embed.js';
+			s.setAttribute('data-timestamp', +new Date());
+			(d.head || d.body).appendChild(s);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+	</div>
+
+
+
+		
+		<footer class="page-wrapper dark">
+			<div class="page-container padded">
+		
+				<div class="row">
+		
+					<div class="col-md-3">
+						<nav class="footer-menu">
+							<ul>
+		
+								<li>
+									<div class="footer_menu_category">Downloads</div>
+									<ul>
+										<li><a href="/press">Apps</a></li>
+									</ul>
+		
+								</li>
+		
+								<li>
+									<div class="footer_menu_category">Open source</div>
+									<ul>
+										  <li><a href="https://github.com/0xwallet" target="_blank"><i class="fa fa-github small"></i>Github</a></li>
+									</ul>
+								</li>
+		
+								<li>
+									<div class="footer_menu_category">Social</div>
+									<ul>
+										<li><a href="https://twitter.com/0xgram" target="_blank"><i class="fa fa-twitter small"></i>Twitter</a></li>
+									</ul>
+								</li>
+		
+							</ul>
+						</nav>
+					</div>
+		
+		
+					<div class="col-md-3">
+						  <nav class="footer-menu">
+							    <ul>
+		
+								      <li>
+									        <div class="footer_menu_category"> Company </div>
+									        <ul>
+										          <li><a href="/press">About Us</a></li>
+										          <li><a href="/press">Contacts</a></li>
+										          <li><a href="/press">Privacy & Terms</a></li>
+									        </ul>
+		
+								      </li>
+		
+		
+							    </ul>
+						  </nav>
+					</div>
+		
+					<div class="col-md-3">
+						  <nav class="footer-menu">
+							    <ul>
+		
+								      <li>
+									        <div class="footer_menu_category"> Language </div>
+									        <ul>
+										          <li><a href="/cn">中文</a></li>
+										          <li><a href="/en">English</a></li>
+									        </ul>
+		
+								      </li>
+		
+		
+							    </ul>
+						  </nav>
+					</div>
+		
+					<div class="col-md-3">
+						  <nav class="footer-menu">
+							    <ul>
+		
+								      <li>
+									        <div class="footer_menu_category">Blog</div>
+									        <ul>
+												              <li><a href="/blog/bit-protocol">bit:// 协议</a></li>
+										              <li><a href="/blog/personal-portfolio-website-with-endurojs">Personal portfolio website with endurojs</a></li>
+										              <li><a href="/blog/angular-project-with-endurojs">Angular project with enduro.js</a></li>
+										              <li><a href="/blog/multicultural-site-with-endurojs">Multicultural site with enduro.js</a></li>
+										              <li><a href="/blog/link-s3-to-enduro">Link s3 to enduro</a></li>
+										              <li><a href="/blog/how-to-make-a-blog-with-endurojs">How to create a blog with enduro.js</a></li>
+										              <li><a href="/blog/advantages_of_static_serving">Static generation vs dynamic serving</a></li>
+							        </ul>
+		
+								      </li>
+		
+							    </ul>
+						  </nav>
+					</div>
+				</div>
+		
+				<div class="row">
+					<div class="col-md-12 logo text-center">
+						<div class="wedge-6x"></div>
+						<svg width="22.1px" height="24.8px" viewBox="0 0 22.1 24.8">
+							  <path id="justhexagon" fill="#fff" d="M9.8,24.4l-8.6-4.9C0.5,19.1,0,18.2,0,17.3l0-9.9c0-0.9,0.5-1.7,1.3-2.2l8.6-4.9c0.8-0.4,1.7-0.4,2.5,0
+								l8.6,4.9c0.8,0.4,1.3,1.3,1.3,2.2v9.9c0,0.9-0.5,1.7-1.3,2.2l-8.6,4.9C11.5,24.9,10.6,24.9,9.8,24.4z"/>
+						  <circle id="circle_9" fill="#423d3d" cx="11.06" cy="12.4" r="9"/>
+						  <circle id="circle_6" fill="#423d3d" cx="11.06" cy="12.4" r="6"/>
+						  <polyline points="9.33 13.4 11.06 12.4 12.79 13.4" stroke="black" stroke-width="3"
+						            stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+						  <polyline points="11.06 12.4 11.06 10.4" stroke="black" stroke-width="3"
+						            stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+						  <circle id="circle_2" fill="#a95" cx="11.06" cy="12.4" r="2"/>
+						</svg>
+						<p>Open Wallet Alliance © 2019. All Rights Reserved.</p>
+					</div>
+				</div>
+		
+			</div>
+		</footer>
+		<script data-main="/assets/js/main.js" src="/assets/vendor/requirejs/require.js"></script>
+	</body>
+</html>

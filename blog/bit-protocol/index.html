@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		  <title>0xWallet - bit:// 协议</title>
+
+		<link rel="stylesheet" href="/assets/css/main.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/zenburn.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'>
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicon/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicon/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicon/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicon/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/assets/img/favicon/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+		<link rel="manifest" href="/assets/img/favicon//manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/assets/img/favicon//ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+		<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">		<meta name="description" content="Code-only, no-clicking, flat-file, node.js cms for professionals. With everything needed - Sass, iconfont generator, spritesheet generator, templates...">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-81822746-2', 'auto');
+			ga('send', 'pageview');
+		</script>
+
+	</head>
+	<body>
+		<header>
+			<div class="logo" >
+				<a href="/"><svg width="22.1px" height="24.8px" viewBox="0 0 22.1 24.8">
+	  <path id="justhexagon" fill="#231f20" d="M9.8,24.4l-8.6-4.9C0.5,19.1,0,18.2,0,17.3l0-9.9c0-0.9,0.5-1.7,1.3-2.2l8.6-4.9c0.8-0.4,1.7-0.4,2.5,0
+		          l8.6,4.9c0.8,0.4,1.3,1.3,1.3,2.2v9.9c0,0.9-0.5,1.7-1.3,2.2l-8.6,4.9C11.5,24.9,10.6,24.9,9.8,24.4z"/>
+    <circle id="circle_9" fill="#423d3d" cx="11.06" cy="12.4" r="9"/>
+    <circle id="circle_6" fill="#231f20" cx="11.06" cy="12.4" r="6"/>
+    <polyline points="9.33 13.4 11.06 12.4 12.79 13.4" stroke="white" stroke-width="3"
+              stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+    <polyline points="11.06 12.4 11.06 10.4" stroke="white" stroke-width="3"
+              stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+    <circle id="circle_2" fill="#423d3d" cx="11.06" cy="12.4" r="2"/>
+</svg>
+</a>
+			</div>
+			<nav class="screen-menu">
+				<label for="endrjs_collapsed_menu" class="collapsed-menu">
+					<i class="fa fa-bars"></i>
+				</label>
+				<input id="endrjs_collapsed_menu" type="checkbox">
+				<ul>
+						<li>
+							<a  href="/">Home</a>
+						</li>
+						<li>
+							<a  href="/docs">Docs</a>
+						</li>
+						<li>
+							<a  href="/blog">Blog</a>
+						</li>
+						<li>
+							<a target="_blank" href="https://owaf.io/login">Log In</a>
+						</li>
+				</ul>
+			</nav>			<div class="clearfix"></div>
+		</header>
+
+	<div class="wedge-5x"></div>
+	<div class="page-container">
+		<div class="panel">
+
+			<a class="back" href="/blog"><i class="fa fa-angle-left"></i>Back to blog</a>
+
+			<div class="row">
+				<div class="col-md-12">
+					<h1>bit:// 协议</h1>
+					<h5>Tuesday, 09 April, 2019</h5>
+					<div class="wedge-3x"></div>
+					<div class="markdown-block"><p><img src="https://s3-eu-west-1.amazonaws.com/enduro.website/direct_uploads/1487950080_themes_intro.jpg" alt=""></p>
+<blockquote>
+<p>Whether you are a freelancer, photographer or maybe just looking for job, having a personal portfolio website can&#39;t hurt, can it? I will try to walk you through creating your own personal portfolio in under <strong>5 minutes</strong>. No javascript/html/css knowledge necessary!</p>
+</blockquote>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>You have to have <a href="https://nodejs.org/en/download/">node.js installed</a> with enduro.js installed globally (just run <code>npm i enduro -g</code>).</p>
+<h2 id="creating-new-project">Creating new project</h2>
+<p>Next up, we are going to create a new project from an <strong>mirror</strong> theme. Open up your terminal window, cd into the directory where you would want your project to be stored in and run:</p>
+<pre><code class="lang-bash">$ enduro theme mirror
+</code></pre>
+<p>You will be asked to provide a name for your portfolio as well as a admin login username and password.</p>
+<p><img src="https://s3-eu-west-1.amazonaws.com/enduro.website/direct_uploads/1487950357_theme_cli_screenshot.png" alt=""></p>
+<p>Once your project is created, a browser window opens automatically! To edit content just click the <strong>edit this page</strong> button.</p>
+<p><img src="https://s3-eu-west-1.amazonaws.com/enduro.website/direct_uploads/1487950530_cp.png" alt=""></p>
+<h2 id="access-admin-interface">Access admin interface</h2>
+<p>Clicking the <strong>edit this page</strong> button will open the enduro.js admin interface. Just login with the credentials you&#39;ve put in previously in the terminal window.</p>
+<p><img src="https://s3-eu-west-1.amazonaws.com/enduro.website/direct_uploads/1487950755_cp.png" alt=""></p>
+<h2 id="changing-content">Changing content</h2>
+<p>Using the admin interface is quite self-explanatory. You can copy-paste images by clicking the image or just putting public links to the images by clicking the link icon. You&#39;ll get it.</p>
+<h2 id="publishing-your-website">Publishing your website</h2>
+<p>If you open the folder where you created this project just find a <span class="markdown_folder">/_generated</span> folder. Just upload this whole folder somewhere and your website is online!</p>
+<p><img src="https://www.netlify.com/img/press/logos/full-logo-light.svg" alt=""></p>
+<h3 id="publishing-your-portfolio-with-netlify">Publishing your portfolio with Netlify</h3>
+<p>Netlify offers probably the simplest way to get your portfolio online. Good news is that the <strong>mirror</strong> theme comes preconfigured to work with Netlify out of the box. Just install netlify cli by running <code>npm install netlify-cli -g</code>. After that all you need to do is <code>enduro render &amp;&amp; netlify deploy -p _generated</code>. You can also hook it up to a GitHub repository - read more about this in the <a href="/docs/netlify">docs</a>.</p>
+<h3 id="publish-your-portfolio-on-github-pages">Publish your portfolio on Github pages</h3>
+<p><a href="https://pages.github.com/">Github pages</a> offers a free way to host your static page. For this to work you have to put the generated files in a <code>gh-pages</code> branch.</p>
+<p>You can just use github&#39;s website user interface to upload the files from the <span class="markdown_folder">/_generated</span> folder. Other option is to use git to get this done. Follow this instructions to get your enduro.js generated personal portfolio online with Github pages:</p>
+<ol>
+<li><a href="https://github.com/join">Sign up</a> for a free Github account if you don&#39;t already have one</li>
+<li>Create new repository on github.com and copy its <strong>.git</strong> link</li>
+<li>Use the terminal to <strong>cd into the project&#39;s folder</strong> and do <code>git init</code>, <code>git add .</code> and <code>git commit -m &#39;first commit&#39;</code></li>
+<li>Link your folder with Github&#39;s repository by running <code>git remote add origin &lt;.git link you got from github&gt;</code></li>
+<li>Put the files on Github by running <code>git push --set-upstream origin master</code></li>
+<li>Now all the source files are on Github, but we need to push the <strong>generated files</strong> into a separate branch named <strong>gh-pages</strong>, which Github recognizes and serves as a static page.</li>
+<li><code>git checkout -b gh-pages</code></li>
+<li><code>git add -f _generated</code></li>
+<li><code>git commit -m &#39;publishing gh pages&#39;</code></li>
+<li><code>git push --set-upstream origin gh-pages</code></li>
+<li><code>git push origin $(git subtree split --prefix _generated):gh-pages --force</code></li>
+</ol>
+<p>If everything went well, your portfolio should be live at <strong>https://&lt;your_github_username&gt;.github.io/&lt;project_name&gt;/</strong></p>
+</div>
+				</div>
+			</div>
+
+			<a class="back" href="/blog"><i class="fa fa-angle-left"></i>Back to blog</a>
+
+		</div>
+		<div id="disqus_thread"></div>
+
+		<script>
+			(function() { // DON'T EDIT BELOW THIS LINE
+			var d = document, s = d.createElement('script');
+			s.src = '//endurojs.disqus.com/embed.js';
+			s.setAttribute('data-timestamp', +new Date());
+			(d.head || d.body).appendChild(s);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+	</div>
+
+
+
+		
+		<footer class="page-wrapper dark">
+			<div class="page-container padded">
+		
+				<div class="row">
+		
+					<div class="col-md-3">
+						<nav class="footer-menu">
+							<ul>
+		
+								<li>
+									<div class="footer_menu_category">Downloads</div>
+									<ul>
+										<li><a href="/press">Apps</a></li>
+									</ul>
+		
+								</li>
+		
+								<li>
+									<div class="footer_menu_category">Open source</div>
+									<ul>
+										  <li><a href="https://github.com/0xwallet" target="_blank"><i class="fa fa-github small"></i>Github</a></li>
+									</ul>
+								</li>
+		
+								<li>
+									<div class="footer_menu_category">Social</div>
+									<ul>
+										<li><a href="https://twitter.com/0xgram" target="_blank"><i class="fa fa-twitter small"></i>Twitter</a></li>
+									</ul>
+								</li>
+		
+							</ul>
+						</nav>
+					</div>
+		
+		
+					<div class="col-md-3">
+						  <nav class="footer-menu">
+							    <ul>
+		
+								      <li>
+									        <div class="footer_menu_category"> Company </div>
+									        <ul>
+										          <li><a href="/press">About Us</a></li>
+										          <li><a href="/press">Contacts</a></li>
+										          <li><a href="/press">Privacy & Terms</a></li>
+									        </ul>
+		
+								      </li>
+		
+		
+							    </ul>
+						  </nav>
+					</div>
+		
+					<div class="col-md-3">
+						  <nav class="footer-menu">
+							    <ul>
+		
+								      <li>
+									        <div class="footer_menu_category"> Language </div>
+									        <ul>
+										          <li><a href="/cn">中文</a></li>
+										          <li><a href="/en">English</a></li>
+									        </ul>
+		
+								      </li>
+		
+		
+							    </ul>
+						  </nav>
+					</div>
+		
+					<div class="col-md-3">
+						  <nav class="footer-menu">
+							    <ul>
+		
+								      <li>
+									        <div class="footer_menu_category">Blog</div>
+									        <ul>
+												              <li><a href="/blog/bit-protocol">bit:// 协议</a></li>
+										              <li><a href="/blog/personal-portfolio-website-with-endurojs">Personal portfolio website with endurojs</a></li>
+										              <li><a href="/blog/angular-project-with-endurojs">Angular project with enduro.js</a></li>
+										              <li><a href="/blog/multicultural-site-with-endurojs">Multicultural site with enduro.js</a></li>
+										              <li><a href="/blog/link-s3-to-enduro">Link s3 to enduro</a></li>
+										              <li><a href="/blog/how-to-make-a-blog-with-endurojs">How to create a blog with enduro.js</a></li>
+										              <li><a href="/blog/advantages_of_static_serving">Static generation vs dynamic serving</a></li>
+							        </ul>
+		
+								      </li>
+		
+							    </ul>
+						  </nav>
+					</div>
+				</div>
+		
+				<div class="row">
+					<div class="col-md-12 logo text-center">
+						<div class="wedge-6x"></div>
+						<svg width="22.1px" height="24.8px" viewBox="0 0 22.1 24.8">
+							  <path id="justhexagon" fill="#fff" d="M9.8,24.4l-8.6-4.9C0.5,19.1,0,18.2,0,17.3l0-9.9c0-0.9,0.5-1.7,1.3-2.2l8.6-4.9c0.8-0.4,1.7-0.4,2.5,0
+								l8.6,4.9c0.8,0.4,1.3,1.3,1.3,2.2v9.9c0,0.9-0.5,1.7-1.3,2.2l-8.6,4.9C11.5,24.9,10.6,24.9,9.8,24.4z"/>
+						  <circle id="circle_9" fill="#423d3d" cx="11.06" cy="12.4" r="9"/>
+						  <circle id="circle_6" fill="#423d3d" cx="11.06" cy="12.4" r="6"/>
+						  <polyline points="9.33 13.4 11.06 12.4 12.79 13.4" stroke="black" stroke-width="3"
+						            stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+						  <polyline points="11.06 12.4 11.06 10.4" stroke="black" stroke-width="3"
+						            stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+						  <circle id="circle_2" fill="#a95" cx="11.06" cy="12.4" r="2"/>
+						</svg>
+						<p>Open Wallet Alliance © 2019. All Rights Reserved.</p>
+					</div>
+				</div>
+		
+			</div>
+		</footer>
+		<script data-main="/assets/js/main.js" src="/assets/vendor/requirejs/require.js"></script>
+	</body>
+</html>
