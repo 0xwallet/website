@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		  <title>OWAF | BSV节点实现日志（1）</title>
+
+		<link rel="stylesheet" href="/assets/css/main.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/zenburn.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'>
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicon/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicon/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicon/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicon/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/assets/img/favicon/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+		<link rel="manifest" href="/assets/img/favicon//manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/assets/img/favicon//ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+		<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">		<meta name="description" content="Code-only, no-clicking, flat-file, node.js cms for professionals. With everything needed - Sass, iconfont generator, spritesheet generator, templates...">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-81822746-2', 'auto');
+			ga('send', 'pageview');
+		</script>
+
+	</head>
+	<body>
+		<header>
+			<div class="logo" >
+				<a href="/"><svg width="22.1px" height="24.8px" viewBox="0 0 22.1 24.8">
+	  <path id="justhexagon" fill="#231f20" d="M9.8,24.4l-8.6-4.9C0.5,19.1,0,18.2,0,17.3l0-9.9c0-0.9,0.5-1.7,1.3-2.2l8.6-4.9c0.8-0.4,1.7-0.4,2.5,0
+		          l8.6,4.9c0.8,0.4,1.3,1.3,1.3,2.2v9.9c0,0.9-0.5,1.7-1.3,2.2l-8.6,4.9C11.5,24.9,10.6,24.9,9.8,24.4z"/>
+    <circle id="circle_9" fill="#423d3d" cx="11.06" cy="12.4" r="9"/>
+    <circle id="circle_6" fill="#231f20" cx="11.06" cy="12.4" r="6"/>
+    <polyline points="9.33 13.4 11.06 12.4 12.79 13.4" stroke="white" stroke-width="3"
+              stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+    <polyline points="11.06 12.4 11.06 10.4" stroke="white" stroke-width="3"
+              stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+    <circle id="circle_2" fill="#423d3d" cx="11.06" cy="12.4" r="2"/>
+</svg>
+</a>
+			</div>
+			<nav class="screen-menu">
+				<label for="endrjs_collapsed_menu" class="collapsed-menu">
+					<i class="fa fa-bars"></i>
+				</label>
+				<input id="endrjs_collapsed_menu" type="checkbox">
+				<ul>
+						<li>
+							<a  href="/">Home</a>
+						</li>
+						<li>
+							<a  href="/docs">Docs</a>
+						</li>
+						<li>
+							<a  href="/blog">Blog</a>
+						</li>
+						<li>
+							<a target="_blank" href="https://owaf.io/login">Log In</a>
+						</li>
+				</ul>
+			</nav>			<div class="clearfix"></div>
+		</header>
+
+	<div class="wedge-5x"></div>
+	<div class="page-container">
+		<div class="panel">
+
+			<a class="back" href="/blog"><i class="fa fa-angle-left"></i>Back to blog</a>
+
+			<div class="row">
+				<div class="col-md-12">
+					<h1>BSV节点实现日志（1）</h1>
+					<h5>Sunday, 31 March, 2019</h5>
+					<div class="wedge-3x"></div>
+					<div class="markdown-block"><p>比特币网络是开放的，理论上一个节点只要符合比特币的共识协议，就可以参与到网络中。为了更深入理解比特币的共识协议，也是为在比特币上做更多的应用打基础，我们决定实现一个简单的可使用的比特币节点，在实现完成后，代码会以MIT协议开源在Github上。</p>
+<p>在本篇日志中，我们将通过dns获取到种子节点的列表。</p>
+<h1 id="-ip">获取种子节点的IP</h1>
+<p><img src="https://cdn.nlark.com/yuque/0/2019/png/308289/1554645999973-35f10a84-3e77-40fc-bbe1-4a2813704e53.png#align=left&amp;display=inline&amp;height=241&amp;name=image.png&amp;originHeight=580&amp;originWidth=1204&amp;size=890504&amp;status=done&amp;width=500" alt="image.png"></p>
+<p>种子节点是新的节点加入比特币网络的引荐人，在节点的代码中会硬编码几个域名。节点在启动时，会向DNS服务器查询这几个域名对应的A记录，便可得到种子节点的IP地址。</p>
+<pre><code class="lang-erlang">seeders() -&gt;
+    [&quot;seed.bitcoinsv.io&quot;,
+     &quot;seed.cascharia.com&quot;,
+     &quot;seed.satoshisvision.network&quot;
+    ].
+
+seed_nodes() -&gt;
+    L = seeders(),
+    lists:flatten([dnslookup(D) || D &lt;- L]).
+</code></pre>
+<p>运行结果：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2019/png/308289/1554652822504-ee5435ac-efe0-438d-b298-a455d897a173.png#align=left&amp;display=inline&amp;height=283&amp;name=image.png&amp;originHeight=566&amp;originWidth=512&amp;size=81865&amp;status=done&amp;width=256" alt="image.png"></p>
+<blockquote>
+<p>©️OWAF</p>
+</blockquote>
+</div>
+				</div>
+			</div>
+
+			<a class="back" href="/blog"><i class="fa fa-angle-left"></i>Back to blog</a>
+
+		</div>
+		<div id="disqus_thread"></div>
+
+
+	</div>
+
+
+
+		
+		<footer class="page-wrapper dark">
+			<div class="page-container padded">
+		
+				<div class="row">
+		
+					<div class="col-md-3">
+						<nav class="footer-menu">
+							<ul>
+		
+								<li>
+									<div class="footer_menu_category">Downloads</div>
+									<ul>
+										<li><a href="/press">Apps</a></li>
+									</ul>
+		
+								</li>
+		
+								<li>
+									<div class="footer_menu_category">Open source</div>
+									<ul>
+										  <li><a href="https://github.com/0xwallet" target="_blank"><i class="fa fa-github small"></i>Github</a></li>
+									</ul>
+								</li>
+		
+								<li>
+									<div class="footer_menu_category">Social</div>
+									<ul>
+										<li><a href="https://twitter.com/0xgram" target="_blank"><i class="fa fa-twitter small"></i>Twitter</a></li>
+									</ul>
+								</li>
+		
+							</ul>
+						</nav>
+					</div>
+		
+		
+					<div class="col-md-3">
+						  <nav class="footer-menu">
+							    <ul>
+		
+								      <li>
+									        <div class="footer_menu_category"> Company </div>
+									        <ul>
+										          <li><a href="/press">About Us</a></li>
+										          <li><a href="/press">Contacts</a></li>
+										          <li><a href="/press">Privacy & Terms</a></li>
+									        </ul>
+		
+								      </li>
+		
+		
+							    </ul>
+						  </nav>
+					</div>
+		
+					<div class="col-md-3">
+						  <nav class="footer-menu">
+							    <ul>
+		
+								      <li>
+									        <div class="footer_menu_category"> Language </div>
+									        <ul>
+										          <li><a href="/cn">中文</a></li>
+										          <li><a href="/en">English</a></li>
+									        </ul>
+		
+								      </li>
+		
+		
+							    </ul>
+						  </nav>
+					</div>
+		
+					<div class="col-md-3">
+						  <nav class="footer-menu">
+							    <ul>
+		
+								      <li>
+									        <div class="footer_menu_category">Blog</div>
+									        <ul>
+												              <li><a href="/blog/bit-protocol">bit:// 协议</a></li>
+										              <li><a href="/blog/bsv-node-impl-5">BSV节点实现日志（5）</a></li>
+										              <li><a href="/blog/bsv-node-impl-4">BSV节点实现日志（4）</a></li>
+										              <li><a href="/blog/bsv-node-impl-3">BSV节点实现日志（3）</a></li>
+										              <li><a href="/blog/bsv-node-impl-2">BSV节点实现日志（2）</a></li>
+										              <li><a href="/blog/bsv-node-impl-1">BSV节点实现日志（1）</a></li>
+							        </ul>
+		
+								      </li>
+		
+							    </ul>
+						  </nav>
+					</div>
+				</div>
+		
+				<div class="row">
+					<div class="col-md-12 logo text-center">
+						<div class="wedge-6x"></div>
+						<svg width="22.1px" height="24.8px" viewBox="0 0 22.1 24.8">
+							  <path id="justhexagon" fill="#fff" d="M9.8,24.4l-8.6-4.9C0.5,19.1,0,18.2,0,17.3l0-9.9c0-0.9,0.5-1.7,1.3-2.2l8.6-4.9c0.8-0.4,1.7-0.4,2.5,0
+								l8.6,4.9c0.8,0.4,1.3,1.3,1.3,2.2v9.9c0,0.9-0.5,1.7-1.3,2.2l-8.6,4.9C11.5,24.9,10.6,24.9,9.8,24.4z"/>
+						  <circle id="circle_9" fill="#423d3d" cx="11.06" cy="12.4" r="9"/>
+						  <circle id="circle_6" fill="#423d3d" cx="11.06" cy="12.4" r="6"/>
+						  <polyline points="9.33 13.4 11.06 12.4 12.79 13.4" stroke="black" stroke-width="3"
+						            stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+						  <polyline points="11.06 12.4 11.06 10.4" stroke="black" stroke-width="3"
+						            stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+						  <circle id="circle_2" fill="#a95" cx="11.06" cy="12.4" r="2"/>
+						</svg>
+						<p>Open Wallet Alliance © 2019. All Rights Reserved.</p>
+					</div>
+				</div>
+		
+			</div>
+		</footer>
+		<script data-main="/assets/js/main.js" src="/assets/vendor/requirejs/require.js"></script>
+	</body>
+</html>

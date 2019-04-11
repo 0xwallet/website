@@ -91,47 +91,40 @@
 					<h1>bit:// 协议</h1>
 					<h5>Tuesday, 09 April, 2019</h5>
 					<div class="wedge-3x"></div>
-					<div class="markdown-block"><p><img src="https://s3-eu-west-1.amazonaws.com/enduro.website/direct_uploads/1487950080_themes_intro.jpg" alt=""></p>
+					<div class="markdown-block"><h1 id="-uri-">通用URI模板</h1>
+<p>bsv目前已经有了 b://, c:// 这样的协议，今后还会有更多各种各样的协议，所以迫切地需要一个通用的协议，俗称协议的协议。</p>
+<p>目前对于bsv 应用的协议的定义一般是：根据txid找到链上数据，这是原料，然后根据这个协议的内容对原料进行处理，最后得到用户可使用的产品。例如 b:// 协议，放进去的是txid，得出来的可能是bitstagram上的图片等文件。<img src="https://cdn.nlark.com/yuque/0/2019/png/308289/1554903316337-20ab4343-bead-477a-b20a-88e623ed679f.png#align=left&amp;display=inline&amp;height=243&amp;name=image.png&amp;originHeight=976&amp;originWidth=2006&amp;size=561279&amp;status=done&amp;width=500" alt="image.png"></p>
+<p>在前段时间，_unwriter 已经发布了用于注册协议 ID 的 bitcom 项目。受到比特币地址的防碰撞机制的启发（世界上没有两个人能够在安全隔离的环境下，生成出相同的比特币地址），_unwriter 采用比特币地址作为协议的 ID。</p>
+<p>所以，bit:// 的第一部分就是bsv应用协议的ID, 即一个比特币地址。</p>
+<pre><code>bit://[B: Bitcom Address]/[Transaction ID]
+</code></pre><p>后面的部分的格式，是由该协议的管理者来决定的。管理者可以将协议的定义文档发送到链上。比如一个协议想要支持 user， tx 这两个参数输入，就可以使用协议 ID 的地址发送以下内容到链上：</p>
+<pre><code>OP_RETURN $ route enable /user/:user
+OP_RETURN $ route enable /tx/:tx
+</code></pre><h1 id="-">分布式路由</h1>
+<p><img src="https://cdn.nlark.com/yuque/0/2019/png/308289/1554900493175-e8ca2f9b-4a91-4de9-9615-94bf7fb6b9fd.png#align=left&amp;display=inline&amp;height=183&amp;name=image.png&amp;originHeight=578&amp;originWidth=1578&amp;size=1056107&amp;status=done&amp;width=500" alt="image.png"></p>
+<p>熟悉bsv的朋友们可能听说过瓶子浏览器，通过连接到支持 b:// 协议服务的 API，就可以浏览各种的链上文件、图片等资源。这些API服务商，例如 bico.media 等等，通常会有一个自己运行的 BitDB 服务器。</p>
+<p>这种模式的问题在于，用户需要在自己的瓶子浏览器里配置 API 的地址，虽然瓶子浏览器可以内置地址，但这样不便于更新，也有中心化的问题。既然我们已经有了bsv链这个能够保证数据的最终一致性的共识层，那么为什么不把这些 API 配置保存到链上呢？所以，在 bit:// 协议中，用户可以从链上获取到 API 服务商的 route mapping。&lt;br /&gt;<img src="https://cdn.nlark.com/yuque/0/2019/png/308289/1554901205832-f7740065-3495-4eb6-8d4f-f59c088032e6.png#align=left&amp;display=inline&amp;height=272&amp;name=image.png&amp;originHeight=762&amp;originWidth=1402&amp;size=1218522&amp;status=done&amp;width=500" alt="image.png"></p>
+<p>这样，在用户初次安装瓶子浏览器的时候，只需要使用内置的 API 服务，这一点和比特币节点的启动机制如出一辙。然后，再去请求链上的最新的 route mapping，并保存到本地。之后，瓶子浏览器就可以根据各个 API 的速度来进行选择。</p>
+<p>最重要的是，比特币是共识层而非存储层，矿工没有激励去存储完整的区块信息。这时候，对于一些开放的协议，例如 b://, c:// 这种的公开文件协议，要保证数据的持久可用，就需要始终能够连接到正常运行的API服务。借助于bit://  协议的分布式路由机制，我们可以获得到世界上所有支持某个特定协议的 API 服务商，进而得到我们想要的数据。</p>
+<p>任何人都可以发送针对于某个协议的 API 服务的 route 到链上，例如：</p>
+<pre><code>OP_RETURN $ route add 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut /:tx https://bico.media/${tx}
+OP_RETURN $ route add 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut /:tx https://api.bitpaste.app/${tx}/raw
+OP_RETURN $ route add 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut /:tx https://media.bitcoinfiles.org/${tx}
+</code></pre><p>那么，如何保证这个API是真实可用的？如果有人发送了一个虚假的route到链上，例如调换了两个参数的输入位置，访问的结果可能依旧是可用的，但是数据是错误的。所以，我们在使用时需要能够保证 route 记录是由 API 服务商亲自发出的。</p>
+<p>_unwriter 前几天发布的 bitsticker 协议能够完美解决这个问题。在API调用返回的HTTP Header 中，嵌入发布 route 记录所使用的比特币地址即可。</p>
+<pre><code>HTTP/1.1 200 OK
+server: nginx/1.15.5 (Ubuntu)
+date: Sun, 31 Mar 2019 19:21:05 GMT&#39;
+content-type: image/jpeg
+content-length: 90887
+connection: close
+x-powered-by: Express
+access-control-allow-origin: *
+bitcoin-address: 1ApeFekX4JJLxiK991KHkTSJe9zFTunNHx
+</code></pre><p>更多的自动化，更多的安全，更美好的未来。</p>
 <blockquote>
-<p>Whether you are a freelancer, photographer or maybe just looking for job, having a personal portfolio website can&#39;t hurt, can it? I will try to walk you through creating your own personal portfolio in under <strong>5 minutes</strong>. No javascript/html/css knowledge necessary!</p>
+<p>©️OWAF</p>
 </blockquote>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>You have to have <a href="https://nodejs.org/en/download/">node.js installed</a> with enduro.js installed globally (just run <code>npm i enduro -g</code>).</p>
-<h2 id="creating-new-project">Creating new project</h2>
-<p>Next up, we are going to create a new project from an <strong>mirror</strong> theme. Open up your terminal window, cd into the directory where you would want your project to be stored in and run:</p>
-<pre><code class="lang-bash">$ enduro theme mirror
-</code></pre>
-<p>You will be asked to provide a name for your portfolio as well as a admin login username and password.</p>
-<p><img src="https://s3-eu-west-1.amazonaws.com/enduro.website/direct_uploads/1487950357_theme_cli_screenshot.png" alt=""></p>
-<p>Once your project is created, a browser window opens automatically! To edit content just click the <strong>edit this page</strong> button.</p>
-<p><img src="https://s3-eu-west-1.amazonaws.com/enduro.website/direct_uploads/1487950530_cp.png" alt=""></p>
-<h2 id="access-admin-interface">Access admin interface</h2>
-<p>Clicking the <strong>edit this page</strong> button will open the enduro.js admin interface. Just login with the credentials you&#39;ve put in previously in the terminal window.</p>
-<p><img src="https://s3-eu-west-1.amazonaws.com/enduro.website/direct_uploads/1487950755_cp.png" alt=""></p>
-<h2 id="changing-content">Changing content</h2>
-<p>Using the admin interface is quite self-explanatory. You can copy-paste images by clicking the image or just putting public links to the images by clicking the link icon. You&#39;ll get it.</p>
-<h2 id="publishing-your-website">Publishing your website</h2>
-<p>If you open the folder where you created this project just find a <span class="markdown_folder">/_generated</span> folder. Just upload this whole folder somewhere and your website is online!</p>
-<p><img src="https://www.netlify.com/img/press/logos/full-logo-light.svg" alt=""></p>
-<h3 id="publishing-your-portfolio-with-netlify">Publishing your portfolio with Netlify</h3>
-<p>Netlify offers probably the simplest way to get your portfolio online. Good news is that the <strong>mirror</strong> theme comes preconfigured to work with Netlify out of the box. Just install netlify cli by running <code>npm install netlify-cli -g</code>. After that all you need to do is <code>enduro render &amp;&amp; netlify deploy -p _generated</code>. You can also hook it up to a GitHub repository - read more about this in the <a href="/docs/netlify">docs</a>.</p>
-<h3 id="publish-your-portfolio-on-github-pages">Publish your portfolio on Github pages</h3>
-<p><a href="https://pages.github.com/">Github pages</a> offers a free way to host your static page. For this to work you have to put the generated files in a <code>gh-pages</code> branch.</p>
-<p>You can just use github&#39;s website user interface to upload the files from the <span class="markdown_folder">/_generated</span> folder. Other option is to use git to get this done. Follow this instructions to get your enduro.js generated personal portfolio online with Github pages:</p>
-<ol>
-<li><a href="https://github.com/join">Sign up</a> for a free Github account if you don&#39;t already have one</li>
-<li>Create new repository on github.com and copy its <strong>.git</strong> link</li>
-<li>Use the terminal to <strong>cd into the project&#39;s folder</strong> and do <code>git init</code>, <code>git add .</code> and <code>git commit -m &#39;first commit&#39;</code></li>
-<li>Link your folder with Github&#39;s repository by running <code>git remote add origin &lt;.git link you got from github&gt;</code></li>
-<li>Put the files on Github by running <code>git push --set-upstream origin master</code></li>
-<li>Now all the source files are on Github, but we need to push the <strong>generated files</strong> into a separate branch named <strong>gh-pages</strong>, which Github recognizes and serves as a static page.</li>
-<li><code>git checkout -b gh-pages</code></li>
-<li><code>git add -f _generated</code></li>
-<li><code>git commit -m &#39;publishing gh pages&#39;</code></li>
-<li><code>git push --set-upstream origin gh-pages</code></li>
-<li><code>git push origin $(git subtree split --prefix _generated):gh-pages --force</code></li>
-</ol>
-<p>If everything went well, your portfolio should be live at <strong>https://&lt;your_github_username&gt;.github.io/&lt;project_name&gt;/</strong></p>
 </div>
 				</div>
 			</div>
@@ -141,15 +134,6 @@
 		</div>
 		<div id="disqus_thread"></div>
 
-		<script>
-			(function() { // DON'T EDIT BELOW THIS LINE
-			var d = document, s = d.createElement('script');
-			s.src = '//endurojs.disqus.com/embed.js';
-			s.setAttribute('data-timestamp', +new Date());
-			(d.head || d.body).appendChild(s);
-			})();
-		</script>
-		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 	</div>
 
@@ -237,12 +221,11 @@
 									        <div class="footer_menu_category">Blog</div>
 									        <ul>
 												              <li><a href="/blog/bit-protocol">bit:// 协议</a></li>
-										              <li><a href="/blog/personal-portfolio-website-with-endurojs">Personal portfolio website with endurojs</a></li>
-										              <li><a href="/blog/angular-project-with-endurojs">Angular project with enduro.js</a></li>
-										              <li><a href="/blog/multicultural-site-with-endurojs">Multicultural site with enduro.js</a></li>
-										              <li><a href="/blog/link-s3-to-enduro">Link s3 to enduro</a></li>
-										              <li><a href="/blog/how-to-make-a-blog-with-endurojs">How to create a blog with enduro.js</a></li>
-										              <li><a href="/blog/advantages_of_static_serving">Static generation vs dynamic serving</a></li>
+										              <li><a href="/blog/bsv-node-impl-5">BSV节点实现日志（5）</a></li>
+										              <li><a href="/blog/bsv-node-impl-4">BSV节点实现日志（4）</a></li>
+										              <li><a href="/blog/bsv-node-impl-3">BSV节点实现日志（3）</a></li>
+										              <li><a href="/blog/bsv-node-impl-2">BSV节点实现日志（2）</a></li>
+										              <li><a href="/blog/bsv-node-impl-1">BSV节点实现日志（1）</a></li>
 							        </ul>
 		
 								      </li>
